@@ -42,22 +42,43 @@
     <article>
 
         <p>Obszar gry:</p>
-        <button id="obszarGry" class="gameArea" type="button"></button>
+        <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
         <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
         <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
     </article>
     <script>
+        let userScore;
+        let changingColorMoment;
+        let userReflex = [];
+        let minReactionTime, maxReactionTime, avgReactionTime;
+
         function startGame() {
+        clearOldResults();
         const colors = ['#FFFF00', '#006400', '#FF00FF', '#00BFFF', '#FFF8DC'];
         for (let i = 0; i < 5; i++) {
-            setTimeout(() => document.getElementById("obszarGry").style.background = colors.at(i), ((Math.floor(Math.random()) +i )*1000));
+            setTimeout(() => {
+                document.getElementById("obszarGry").style.background = colors.at(i);
+                changingColorMoment=(new Date()).getTime();
+                },
+             ((Math.random() + 2*i )*1000));
             }
         }
 
-
-
-
         function stopGame() {
+
+        }
+
+        function clearOldResults() {
+            userReflex.splice(0, userReflex.length);
+        }
+
+        function clickingTimeGameArea() {
+            userScore=(new Date()).getTime();
+            countReflex();
+        }
+
+        function countReflex() {
+            userReflex.push(userScore-changingColorMoment);
 
         }
 
