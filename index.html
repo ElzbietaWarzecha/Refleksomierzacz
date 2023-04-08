@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="EW"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content="Zadanie domowe JS - refleksomierzacz"/>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+    <title>Refleksomierzacz</title>
+    <link href="layout.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <h2>REFLEKSOMIERZACZ</h2>
+</header>
+<section>
+    <nav>
+        <p>Statystki</p>
+        <p>Sprawdź swój refleks! Instrukcja: </p>
+        <ol>
+            <li>Wciśnij start</li>
+            <li>Klikaj w obszar gry, gdy zmieni się kolor obszaru</li>
+            <li>Wciśnij stop</li>
+            <li>Ciesz się wynikami</li>
+        </ol>
+    </nav>
+    <style>
+		.ordinaryButton {
+			background: #ffb366;
+            font-size: 15px;
+            width:128px;
+            height:90px;
+		}
+	    .gameArea {
+			background: #ffb366;
+            font-size: 15px;
+            width:500px;
+            height:350px;
+		}
+    </style>
+    <article>
+
+        <p>Obszar gry:</p>
+        <button id="obszarGry" class="gameArea" type="button"></button>
+        <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
+        <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
+    </article>
+    <script>
+        function startGame() {
+        const colors = ['#FFFF00', '#006400', '#FF00FF', '#00BFFF', '#FFF8DC'];
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => document.getElementById("obszarGry").style.background = colors.at(i), ((Math.floor(Math.random()) +i )*1000));
+            }
+        }
+
+
+
+
+        function stopGame() {
+
+        }
+
+    </script>
+</section>
+</body>
+</html>
