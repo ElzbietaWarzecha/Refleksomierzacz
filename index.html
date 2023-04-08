@@ -41,6 +41,7 @@
 		table, th, td {
             border:1px solid black;
         }
+
     </style>
     <article>
 
@@ -49,28 +50,30 @@
         <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
         <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
 
-        <table style="width:100%">
-            <tr>
-                <th>Min. czas reakcji</th>
-                <th>Max. czas reakcji</th>
-                <th>Średni czas reakcji</th>
-            </tr>
-            <tr>
-                <td>minReactionTime</td>
-                <td>maxReactionTime</td>
-                <td>avgReactionTime</td>
-            </tr>
-        </table>
+<!--        <table style="width:100%">-->
+<!--            <tr>-->
+<!--                <th>Min. czas reakcji</th>-->
+<!--                <th>Max. czas reakcji</th>-->
+<!--                <th>Średni czas reakcji</th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>minReactionTime</td>-->
+<!--                <td>maxReactionTime</td>-->
+<!--                <td>avgReactionTime</td>-->
+<!--            </tr>-->
+<!--        </table>-->
     </article>
     <script>
         let userScore;
         let changingColorMoment;
         let userReflex = [];
         let minReactionTime, maxReactionTime, avgReactionTime;
+        let statisticsTable;
 
         function startGame() {
         clearOldResults();
         const colors = ['#FFFF00', '#006400', '#FF00FF', '#00BFFF', '#FFF8DC'];
+        createStatisticsTable();
         for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 document.getElementById("obszarGry").style.background = colors.at(i);
@@ -103,9 +106,42 @@
             maxReactionTime = userReflex.at(userReflex.length-1);
         }
 
-        function createStatisticsTable() {
+    function createStatisticsTable() {
+        let body = document.body;
+        statisticsTable  = document.createElement('table');
+        statisticsTable.style.width  = '1000px';
+        statisticsTable.style.border = '1px solid black';
 
-        }
+      let newRow = statisticsTable.insertRow(-1);
+
+      let newCell = newRow.insertCell(0);
+      let newText = document.createTextNode("Min. czas reakcji");
+      newCell.appendChild(newText);
+      let newCell2 = newRow.insertCell(1);
+      let newText2 = document.createTextNode("Max. czas reakcji");
+      newCell2.appendChild(newText2);
+      let newCell3 = newRow.insertCell(2);
+      let newText3 = document.createTextNode("Średni czas reakcji");
+      newCell3.appendChild(newText3);
+
+
+      let newRowValues = statisticsTable.insertRow(-1);
+
+      let newCellValue = newRowValues.insertCell(0);
+      let newTextValue = document.createTextNode("null");
+      newCellValue.appendChild(newTextValue);
+      let newCellValue2 = newRowValues.insertCell(1);
+      let newTextValue2 = document.createTextNode("null");
+      newCellValue2.appendChild(newTextValue2);
+      let newCellValue3 = newRowValues.insertCell(2);
+      let newTextValue3 = document.createTextNode("null");
+      newCellValue3.appendChild(newTextValue3);
+
+      body.appendChild(statisticsTable);
+    }
+
+
+
 
     </script>
 </section>
