@@ -38,6 +38,9 @@
             width:500px;
             height:350px;
 		}
+		table, th, td {
+            border:1px solid black;
+        }
     </style>
     <article>
 
@@ -45,6 +48,19 @@
         <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
         <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
         <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
+
+        <table style="width:100%">
+            <tr>
+                <th>Min. czas reakcji</th>
+                <th>Max. czas reakcji</th>
+                <th>Średni czas reakcji</th>
+            </tr>
+            <tr>
+                <td>minReactionTime</td>
+                <td>maxReactionTime</td>
+                <td>avgReactionTime</td>
+            </tr>
+        </table>
     </article>
     <script>
         let userScore;
@@ -79,6 +95,15 @@
 
         function countReflex() {
             userReflex.push(userScore-changingColorMoment);
+            let sum = 0;
+            userReflex.forEach((num) => { sum += num });
+            avgReactionTime = sum / userReflex.length;
+            userReflex.sort();
+            minReactionTime = userReflex.at(0);
+            maxReactionTime = userReflex.at(userReflex.length-1);
+        }
+
+        function createStatisticsTable() {
 
         }
 
