@@ -104,6 +104,9 @@
             userReflex.sort();
             minReactionTime = userReflex.at(0);
             maxReactionTime = userReflex.at(userReflex.length-1);
+            statisticsTable.rows[1].cells[0].innerText = minReactionTime;
+            statisticsTable.rows[1].cells[1].innerText = maxReactionTime;
+            statisticsTable.rows[1].cells[2].innerText = avgReactionTime;
         }
 
     function createStatisticsTable() {
@@ -128,13 +131,13 @@
       let newRowValues = statisticsTable.insertRow(-1);
 
       let newCellValue = newRowValues.insertCell(0);
-      let newTextValue = document.createTextNode("null");
+      let newTextValue = document.createTextNode(minReactionTime);
       newCellValue.appendChild(newTextValue);
       let newCellValue2 = newRowValues.insertCell(1);
-      let newTextValue2 = document.createTextNode("null");
+      let newTextValue2 = document.createTextNode(maxReactionTime);
       newCellValue2.appendChild(newTextValue2);
       let newCellValue3 = newRowValues.insertCell(2);
-      let newTextValue3 = document.createTextNode("null");
+      let newTextValue3 = document.createTextNode(avgReactionTime);
       newCellValue3.appendChild(newTextValue3);
 
       body.appendChild(statisticsTable);
