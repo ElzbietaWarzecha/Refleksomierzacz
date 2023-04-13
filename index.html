@@ -40,6 +40,7 @@
             width:128px;
             height:90px;
             display: inline-block;
+            margin: 20px auto 20px auto;
 		}
 	    .gameArea {
 			background: #ffb366;
@@ -52,7 +53,14 @@
             width: 1000px;
             margin-left: 420px;
         }
-        button {
+        .outer {
+            display: flex;
+            flex: 6;
+        }
+        .inner {
+            flex: 6;
+            margin: auto;
+            padding: 5px;
         }
 
 </style>
@@ -76,9 +84,13 @@
     <article>
 
         <p font-size: 15px>OBSZAR GRY:</p>
-        <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
-        <button class="ordinaryButton" onclick="startGame()" type="button">START</button>
-        <button class="ordinaryButton" onclick="stopGame()" type="button">STOP</button>
+        <div class="outer">
+            <div><button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button></div>
+            <div class="inner">
+                <button class="ordinaryButton" onclick="startGame()" type="button">START</button>
+                <button class="ordinaryButton" onclick="stopGame()" type="button">STOP</button>
+            </div>
+        </div>
 
     </article>
     <script>
