@@ -10,22 +10,7 @@
     <link type="text/css" rel="stylesheet">
 </head>
 
-<body>
-<header>
-    <h2>REFLEKSOMIERZACZ</h2>
-</header>
-<section>
-    <nav>
-        <p>Sprawdź swój refleks! </p>
-        <p>Instrukcja: </p>
-        <ol>
-            <li>Wciśnij START</li>
-            <li>Klikaj w OBSZAR GRY, gdy zmieni się kolor obszaru: kolor zmieni się 5 razy</li>
-            <li>Jeśli chcesz zatrzymać grę wcześniej, wciśnij STOP</li>
-            <li>Ciesz się wynikami</li>
-        </ol>
-    </nav>
-    <style>
+<style>
         header {
 	        background-color: PaleGreen;
 	        padding: 30px;
@@ -45,9 +30,6 @@
 	        background: Khaki;
 	        height: 380px
         }
-        div {
-            display: inline-block;
-        }
         form {
             width:128px;
             height:90px;
@@ -57,6 +39,7 @@
             font-size: 15px;
             width:128px;
             height:90px;
+            display: inline-block;
 		}
 	    .gameArea {
 			background: #ffb366;
@@ -69,16 +52,33 @@
             width: 1000px;
             margin-left: 420px;
         }
+        button {
+        }
 
-    </style>
+</style>
+
+<body>
+<header>
+    <h2>REFLEKSOMIERZACZ</h2>
+</header>
+<section>
+    <nav>
+        <p>Sprawdź swój refleks! </p>
+        <p>Instrukcja: </p>
+        <ol>
+            <li>Wciśnij START</li>
+            <li>Klikaj w OBSZAR GRY, gdy zmieni się kolor obszaru; kolor zmieni się 5 razy</li>
+            <li>Jeśli chcesz zatrzymać grę wcześniej, wciśnij STOP; OBSZAR GRY zmieni kolor na domyślny, pomarańczowy
+            </li>
+            <li>Ciesz się wynikami</li>
+        </ol>
+    </nav>
     <article>
 
         <p font-size: 15px>OBSZAR GRY:</p>
-        <div>
-            <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
-            <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
-            <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
-        </div>
+        <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
+        <button class="ordinaryButton" onclick="startGame()" type="button">START</button>
+        <button class="ordinaryButton" onclick="stopGame()" type="button">STOP</button>
 
     </article>
     <script>
@@ -111,6 +111,7 @@
 
         function stopGame() {
             functionTimeout.forEach((num) => { clearTimeout(num) });
+            document.getElementById("obszarGry").style.background = '#ffb366';
         }
 
         function clearOldResults() {
@@ -179,6 +180,7 @@
 
       body.appendChild(statisticsTable);
     }
+
 
 
 
