@@ -2,31 +2,9 @@
 	box-sizing: border-box;
 }
 
-header {
-	background-color: PaleGreen;
-	padding: 30px;
-	text-align: center;
-	font-size: 35px;
-}
 
-section {
-	display: flex;
-}
 
-article {
-padding: 20px;
-flex: 6;
-}
 
-nav {
-	flex: 2;
-	background: Khaki;
-	padding: 20px;
-}
-
-nav ol {
-	list-style-type: none;
-}
 
 /*button {
 background: #ffb366;
@@ -35,7 +13,3 @@ font-size: 15px;
   height:90px;
 }*/
 
-form {
-  width:128px;
-  height:90px;
-}

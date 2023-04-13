@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:font-size="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="Author" content="EW"/>
@@ -7,7 +7,7 @@
     <meta name="Description" content="Zadanie domowe JS - refleksomierzacz"/>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
     <title>Refleksomierzacz</title>
-    <link href="layout.css" type="text/css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,8 +16,8 @@
 </header>
 <section>
     <nav>
-        <p>Statystki</p>
-        <p>Sprawdź swój refleks! Instrukcja: </p>
+        <p>Sprawdź swój refleks! </p>
+        <p>Instrukcja: </p>
         <ol>
             <li>Wciśnij start</li>
             <li>Klikaj w obszar gry, gdy zmieni się kolor obszaru</li>
@@ -26,6 +26,32 @@
         </ol>
     </nav>
     <style>
+        header {
+	        background-color: PaleGreen;
+	        padding: 30px;
+	        text-align: center;
+	        font-size: 25px;
+        }
+        section {
+	        display: flex;
+        }
+        article {
+            padding: 20px;
+            flex: 6;
+        }
+        nav {
+	        flex: 2;
+	        padding: 20px;
+	        background: Khaki;
+	        height: 380px
+        }
+        div {
+            display: inline-block;
+        }
+        form {
+            width:128px;
+            height:90px;
+        }
 		.ordinaryButton {
 			background: #ffb366;
             font-size: 15px;
@@ -39,29 +65,21 @@
             height:350px;
 		}
 		table, th, td {
-            border:1px solid black;
+            border: 1px solid black;
+            width: 900px;
+            margin-left: 420px;
         }
 
     </style>
     <article>
 
-        <p>Obszar gry:</p>
-        <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
-        <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
-        <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
+        <p font-size: 15px>OBSZAR GRY:</p>
+        <div>
+            <button id="obszarGry" class="gameArea" onclick="clickingTimeGameArea()" type="button"></button>
+            <button type="button" class="ordinaryButton" onclick="startGame()">START</button>
+            <button type="button" class="ordinaryButton" onclick="stopGame()">STOP</button>
+        </div>
 
-<!--        <table style="width:100%">-->
-<!--            <tr>-->
-<!--                <th>Min. czas reakcji</th>-->
-<!--                <th>Max. czas reakcji</th>-->
-<!--                <th>Średni czas reakcji</th>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>minReactionTime</td>-->
-<!--                <td>maxReactionTime</td>-->
-<!--                <td>avgReactionTime</td>-->
-<!--            </tr>-->
-<!--        </table>-->
     </article>
     <script>
         let userScore;
@@ -69,11 +87,14 @@
         let userReflex = [];
         let minReactionTime, maxReactionTime, avgReactionTime;
         let statisticsTable;
+        let gameCounter = 0;
 
         function startGame() {
         clearOldResults();
         const colors = ['#FFFF00', '#006400', '#FF00FF', '#00BFFF', '#FFF8DC'];
-        createStatisticsTable();
+        if(gameCounter == 0) {
+            createStatisticsTable();
+        }
         for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 document.getElementById("obszarGry").style.background = colors.at(i);
@@ -81,6 +102,7 @@
                 },
              ((Math.random() + 2*i )*1000));
             }
+            gameCounter++;
         }
 
         function stopGame() {
@@ -96,12 +118,16 @@
             countReflex();
         }
 
+        function compareNumbers(a, b) {
+            return a - b;
+        }
+
         function countReflex() {
             userReflex.push(userScore-changingColorMoment);
             let sum = 0;
             userReflex.forEach((num) => { sum += num });
             avgReactionTime = sum / userReflex.length;
-            userReflex.sort();
+            userReflex.sort(compareNumbers);
             minReactionTime = userReflex.at(0);
             maxReactionTime = userReflex.at(userReflex.length-1);
             statisticsTable.rows[1].cells[0].innerText = minReactionTime;
@@ -112,16 +138,14 @@
     function createStatisticsTable() {
         let body = document.body;
         statisticsTable  = document.createElement('table');
-        statisticsTable.style.width  = '1000px';
-        statisticsTable.style.border = '1px solid black';
 
       let newRow = statisticsTable.insertRow(-1);
 
       let newCell = newRow.insertCell(0);
-      let newText = document.createTextNode("Min. czas reakcji");
+      let newText = document.createTextNode("Minimalny czas reakcji");
       newCell.appendChild(newText);
       let newCell2 = newRow.insertCell(1);
-      let newText2 = document.createTextNode("Max. czas reakcji");
+      let newText2 = document.createTextNode("Maksymalny czas reakcji");
       newCell2.appendChild(newText2);
       let newCell3 = newRow.insertCell(2);
       let newText3 = document.createTextNode("Średni czas reakcji");
