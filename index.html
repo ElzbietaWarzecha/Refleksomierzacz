@@ -19,9 +19,9 @@
         <p>Sprawdź swój refleks! </p>
         <p>Instrukcja: </p>
         <ol>
-            <li>Wciśnij start</li>
-            <li>Klikaj w obszar gry, gdy zmieni się kolor obszaru</li>
-            <li>Wciśnij stop</li>
+            <li>Wciśnij START</li>
+            <li>Klikaj w OBSZAR GRY, gdy zmieni się kolor obszaru: kolor zmieni się 5 razy</li>
+            <li>Jeśli chcesz zatrzymać grę wcześniej, wciśnij STOP</li>
             <li>Ciesz się wynikami</li>
         </ol>
     </nav>
@@ -88,24 +88,29 @@
         let minReactionTime, maxReactionTime, avgReactionTime, globalMinReactionTime = 10000;
         let statisticsTable;
         let gameCounter = 0;
+        let gameStarted;
+        let functionTimeout = [];
 
         function startGame() {
         clearOldResults();
+        gameStarted = 1;
         const colors = ['#FFFF00', '#006400', '#FF00FF', '#00BFFF', '#FFF8DC'];
         if(gameCounter == 0) {
             createStatisticsTable();
         }
         for (let i = 0; i < 5; i++) {
-            setTimeout(() => {
+            let currentTimeout = setTimeout(() => {
                 document.getElementById("obszarGry").style.background = colors.at(i);
                 changingColorMoment=(new Date()).getTime();
                 },
-             ((Math.random() + 2*i )*1000));
+                ((Math.random() + 2*i )*1000));
+                functionTimeout.push(currentTimeout);
             }
             gameCounter++;
         }
 
         function stopGame() {
+            functionTimeout.forEach((num) => { clearTimeout(num) });
         }
 
         function clearOldResults() {
