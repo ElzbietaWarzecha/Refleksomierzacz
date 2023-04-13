@@ -66,7 +66,7 @@
 		}
 		table, th, td {
             border: 1px solid black;
-            width: 900px;
+            width: 1000px;
             margin-left: 420px;
         }
 
@@ -85,7 +85,7 @@
         let userScore;
         let changingColorMoment;
         let userReflex = [];
-        let minReactionTime, maxReactionTime, avgReactionTime;
+        let minReactionTime, maxReactionTime, avgReactionTime, globalMinReactionTime = 10000;
         let statisticsTable;
         let gameCounter = 0;
 
@@ -106,7 +106,6 @@
         }
 
         function stopGame() {
-
         }
 
         function clearOldResults() {
@@ -130,9 +129,13 @@
             userReflex.sort(compareNumbers);
             minReactionTime = userReflex.at(0);
             maxReactionTime = userReflex.at(userReflex.length-1);
+            if(globalMinReactionTime>minReactionTime) {
+                globalMinReactionTime=minReactionTime;
+            }
             statisticsTable.rows[1].cells[0].innerText = minReactionTime;
             statisticsTable.rows[1].cells[1].innerText = maxReactionTime;
             statisticsTable.rows[1].cells[2].innerText = avgReactionTime;
+            statisticsTable.rows[1].cells[3].innerText = globalMinReactionTime;
         }
 
     function createStatisticsTable() {
@@ -150,19 +153,24 @@
       let newCell3 = newRow.insertCell(2);
       let newText3 = document.createTextNode("Średni czas reakcji");
       newCell3.appendChild(newText3);
-
+      let newCell4 = newRow.insertCell(3);
+      let newText4 = document.createTextNode("Najlepszy wynik - wszystkie gry");
+      newCell4.appendChild(newText4);
 
       let newRowValues = statisticsTable.insertRow(-1);
 
       let newCellValue = newRowValues.insertCell(0);
-      let newTextValue = document.createTextNode(minReactionTime);
+      let newTextValue = document.createTextNode("-");
       newCellValue.appendChild(newTextValue);
       let newCellValue2 = newRowValues.insertCell(1);
-      let newTextValue2 = document.createTextNode(maxReactionTime);
+      let newTextValue2 = document.createTextNode("-");
       newCellValue2.appendChild(newTextValue2);
       let newCellValue3 = newRowValues.insertCell(2);
-      let newTextValue3 = document.createTextNode(avgReactionTime);
+      let newTextValue3 = document.createTextNode("-");
       newCellValue3.appendChild(newTextValue3);
+      let newCellValue4 = newRowValues.insertCell(3);
+      let newTextValue4 = document.createTextNode("-");
+      newCellValue4.appendChild(newTextValue4);
 
       body.appendChild(statisticsTable);
     }
